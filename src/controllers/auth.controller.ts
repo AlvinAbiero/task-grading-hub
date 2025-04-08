@@ -2,12 +2,14 @@ import { Request, Response, NextFunction } from "express";
 import User, { IUser, UserRole } from "../models/User";
 import { generateAccessToken, generateRefreshToken } from "../utils/jwt";
 import { AppError } from "../middlewares/error";
+import jwt from "jsonwebtoken";
+import { config } from "../config/config";
 
-export const reqister = async (
+export const register = async (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+): Promise<void> => {
   try {
     const { name, email, password, role } = req.body;
 
@@ -49,7 +51,7 @@ export const login = async (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+): Promise<void> => {
   try {
     const { email, password } = req.body;
 
@@ -93,11 +95,64 @@ export const login = async (
   }
 };
 
+export const refreshToken = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const { refreshToken } = req.body;
+
+    if (!refreshToken) {
+      throw new AppError("Refresh token is required", 400);
+    }
+
+    // Verify refresh token
+    const decoded = jwt.verify(refreshToken, config.JWT_SECRET!) as {
+      id: string;
+      email: string;
+      role: UserRole;
+    };
+
+    // Check if user exists
+    const user = await User.findById(decoded.id);
+    if (!user) {
+      throw new AppError("User not found", 404);
+    }
+
+    // Generate new tokens
+    const payload = {
+      id: user._id.toString(),
+      email: user.email,
+      role: user.role,
+    };
+
+    const newAccessToken = generateAccessToken(payload);
+    const newRefreshToken = generateRefreshToken(payload);
+
+    res.status(200).json({
+      message: "Token refreshed successfully",
+      tokens: {
+        accessToken: newAccessToken,
+        refreshToken: newRefreshToken,
+      },
+    });
+  } catch (error) {
+    if (error instanceof jwt.TokenExpiredError) {
+      res.status(401).json({ message: "Refresh token expired" });
+    }
+    if (error instanceof jwt.JsonWebTokenError) {
+      res.status(401).json({ message: "Invalid refresh token" });
+    }
+    next(error);
+  }
+};
+
 export const getCurrentUser = async (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+): Promise<void> => {
   try {
     if (!req.user || !req.user.id) {
       throw new AppError("User not authenticated", 401);
