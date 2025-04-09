@@ -1,0 +1,21 @@
+{"AlvinId":"67f6d0c75577ea27d85f3533"},
+"password": "122345678"
+"email": "alvin@gmail.com",
+ "tokens": {
+        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZjZkMGM3NTU3N2VhMjdkODVmMzUzMyIsImVtYWlsIjoiYWx2aW5AZ21haWwuY29tIiwicm9sZSI6InN0dWRlbnQiLCJpYXQiOjE3NDQyMjg3NDIsImV4cCI6MTc0NDIzMjM0Mn0.BDmTL5RRHJz0as5GdzM7umf1VnRoS6JlwbBjEKaMAnU",
+        "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZjZkMGM3NTU3N2VhMjdkODVmMzUzMyIsImVtYWlsIjoiYWx2aW5AZ21haWwuY29tIiwicm9sZSI6InN0dWRlbnQiLCJpYXQiOjE3NDQyMjg3NDIsImV4cCI6MTc0NDgzMzU0Mn0.Ksp1Uapt4U3dtSqYa52Z9Xfb6rpd1VNz3veFc-UNulI"}
+
+
+{
+    "message": "Login successful",
+    "user": {
+        "id": "67f6d3155577ea27d85f3538",
+        "name": "eugene",
+        "email": "eugene@gmail.com",
+        "role": "admin"
+    },
+    "tokens": {
+        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZjZkMzE1NTU3N2VhMjdkODVmMzUzOCIsImVtYWlsIjoiZXVnZW5lQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0NDIyOTIwNCwiZXhwIjoxNzQ0MjMyODA0fQ.Mh6VPRn99CB92wZUzjnfTV3zCnZICsOTF2nj4bhLbTg",
+        "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZjZkMzE1NTU3N2VhMjdkODVmMzUzOCIsImVtYWlsIjoiZXVnZW5lQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0NDIyOTIwNCwiZXhwIjoxNzQ0ODM0MDA0fQ.359_VD0ItusJIjRhUZhE_K97W5wnDynpPqxahUzr3Us"
+    }
+}

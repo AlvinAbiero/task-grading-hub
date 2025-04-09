@@ -28,10 +28,11 @@ export const authenticate = (
     const authHeader = req.headers.authorization;
 
     if (!authHeader) {
-      return res.status(401).json({
+       res.status(401).json({
         success: false,
         message: "No token provided",
       });
+      return;
     }
 
     const token = authHeader.split(" ")[1];
@@ -50,7 +51,7 @@ export const authenticate = (
 
     next();
   } catch (error) {
-    return res.status(401).json({
+    res.status(401).json({
       success: false,
       message: "Invalid or expired token",
     });
@@ -69,7 +70,7 @@ export const isAdmin = (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-// Middleware to check if user is astuden
+// Middleware to check if user is a student
 export const isStudent = (req: Request, res: Response, next: NextFunction) => {
   if (req.user && req.user.role === UserRole.STUDENT) {
     next();

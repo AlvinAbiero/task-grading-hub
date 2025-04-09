@@ -9,14 +9,14 @@ export const register = async (
   req: Request,
   res: Response,
   next: NextFunction
-): Promise<void> => {
+) => {
   try {
     const { name, email, password, role } = req.body;
 
     // check if user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      throw new AppError("User with this email already exists", 400);
+      throw new AppError("User with this email already exists", 409);
     }
 
     // Only allow admin role if explicitly permitted(e.g,., first user or admin creating another admin)
@@ -51,7 +51,7 @@ export const login = async (
   req: Request,
   res: Response,
   next: NextFunction
-): Promise<void> => {
+) => {
   try {
     const { email, password } = req.body;
 

@@ -72,7 +72,7 @@ export const submitTask = async (
   }
 };
 
-export const getSubmissionByTask = async (
+export const getSubmissionsByTask = async (
   req: Request,
   res: Response,
   next: NextFunction
